@@ -27,11 +27,21 @@ let persons = [
 ]
 
 app.get('/', (request, response) => {
-    response.send('<h1>Hello!</h1><br><p>Go to <a href=http://localhost:3001/api/persons/>persons</a> for data.</p>')
+    response.send(`<h1>Hello!</h1>
+                    <p><a href=./info/>Info</a></p>
+                    <p>Go to <a href=./api/persons/>persons</a> for data.</p>`)
 })
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
+})
+
+app.get('/info', (request, response) => {
+    const people = persons.length
+    const now = new Date()
+
+    response.send(`<p>Phonebook has info for ${people} people.</p>
+                   <p>${now}</p>`)
 })
 
 const PORT = 3001
