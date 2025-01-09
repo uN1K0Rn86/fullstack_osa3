@@ -1,7 +1,7 @@
-POST http://localhost:3001/api/persons
+POST https://puhelinluettelo-back-end.fly.dev/api/persons
 Content-Type: application/json
 
 {
     "name": "",
-    "number": "045 6325371"
+    "number": "045 71"
 }

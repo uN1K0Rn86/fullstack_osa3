@@ -1,2 +1,2 @@
-DELETE http://localhost:3001/api/persons/4
+DELETE https://puhelinluettelo-back-end.fly.dev/api/persons/4
 Content-Type: application/json
