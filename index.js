@@ -75,36 +75,29 @@ app.delete('/api/persons/:id', (request, response) => {
 
 const generateId = () => String(Math.floor(Math.random() * 1000000000000000000000000))
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', async (request, response) => {
     const body = request.body
 
-    if (!body.name) {
+    if (body.name === '') {
         return response.status(400).json({
             Error: 'Name missing'
         })
     }
 
-    if (!body.number) {
+    if (body.number === '') {
         return response.status(400).json({
             Error: 'Number missing'
         })
     }
 
-    if (persons.map(person => person.name).some(name => name === body.name)) {
-        return response.status(409).json({
-            Error: 'Name must be unique'
-        })
-    }
-
-    const person = {
-        id: generateId(),
+    const person = new Person({
         name: body.name,
         number: body.number
-    }
+    })
 
-    persons = persons.concat(person)
-
-    response.json(person)
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    })
 })
 
 const PORT = process.env.PORT
