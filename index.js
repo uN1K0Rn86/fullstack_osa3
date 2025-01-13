@@ -53,7 +53,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
         .catch(error => next(error))
 })
 
-app.post('/api/persons', async (request, response, next) => {
+app.post('/api/persons', (request, response, next) => {
     const body = request.body
 
     if (body.name === '') {
@@ -75,6 +75,21 @@ app.post('/api/persons', async (request, response, next) => {
         .then(savedPerson => {
             response.json(savedPerson)
         })
+})
+
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body
+
+    const person = {
+        name: body.name,
+        number: body.number,
+    }
+
+    Person.findByIdAndUpdate(request.params.id, person, { new: true })
+        .then(updatedPerson => {
+            response.json(updatedPerson)
+        })
+        .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {

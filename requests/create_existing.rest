@@ -2,6 +2,6 @@ POST https://puhelinluettelo-back-end.fly.dev/api/persons
 Content-Type: application/json
 
 {
-    "name": "Ada Lovelace",
-    "number": "39"
+    "name": "Keijo",
+    "number": "09-31054911"
 }
